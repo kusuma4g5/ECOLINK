@@ -1,0 +1,86 @@
+-- Create the database (if it doesn't exist)
+CREATE DATABASE IF NOT EXISTS ragpickers_db;
+
+-- Use the database
+USE ragpickers_db;
+
+-- Create the Ragpickers table
+CREATE TABLE IF NOT EXISTS Ragpickers (
+    ragpicker_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    date_of_birth DATE,
+    location VARCHAR(255),
+    description TEXT,
+    image_path VARCHAR(255),
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the Donations table
+CREATE TABLE IF NOT EXISTS Donations (
+    donation_id INT AUTO_INCREMENT PRIMARY KEY,
+    donor_name VARCHAR(255),
+    donor_email VARCHAR(255),
+    donation_amount DECIMAL(10, 2),
+    donation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payment_method VARCHAR(50),
+    notes TEXT
+);
+
+-- Create the Events table
+CREATE TABLE IF NOT EXISTS Events (
+    event_id INT AUTO_INCREMENT PRIMARY KEY,
+    event_name VARCHAR(255),
+    event_date DATE,
+    event_location VARCHAR(255),
+    event_description TEXT,
+    image_path VARCHAR(255)
+);
+
+-- Create the Gallery table
+CREATE TABLE IF NOT EXISTS Gallery (
+    media_id INT AUTO_INCREMENT PRIMARY KEY,
+    media_type ENUM('image', 'video'),
+    media_path VARCHAR(255),
+    media_description TEXT,
+    upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create the ContactMessages table
+CREATE TABLE IF NOT EXISTS ContactMessages (
+    message_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    subject VARCHAR(255),
+    message TEXT,
+    message_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- Example Insert Statements (Optional)
+-- Insert a Ragpicker example
+INSERT INTO Ragpickers (first_name, last_name, date_of_birth, location, description, image_path) VALUES ('John', 'Doe', '1990-05-15', 'Cityville', 'A hardworking ragpicker.', '/images/john_doe.jpg');
+
+-- Insert a donation example
+INSERT INTO Donations (donor_name, donor_email, donation_amount, payment_method, notes) VALUES ('Jane Smith', 'jane.smith@example.com', 50.00, 'Credit Card', 'Thank you for your work!');
+
+-- Insert an event example
+INSERT INTO Events (event_name, event_date, event_location, event_description, image_path) VALUES ('Community Cleanup', '2024-12-10', 'Park Area', 'A cleanup event to support ragpickers.', '/images/cleanup.jpg');
+
+-- Insert a gallery image example
+INSERT INTO Gallery (media_type, media_path, media_description) VALUES ('image', '/gallery/image1.jpg', 'Ragpickers at work.');
+
+-- Insert a contact message example
+INSERT INTO ContactMessages (name, email, subject, message) VALUES ('Contact Person', 'contact@example.com', 'Inquiry', 'I have a question about donations.');
+
+-- Display table structure
+DESCRIBE Ragpickers;
+DESCRIBE Donations;
+DESCRIBE Events;
+DESCRIBE Gallery;
+DESCRIBE ContactMessages;
+
+-- Select data
+SELECT * FROM Ragpickers;
+SELECT * FROM Donations;
+SELECT * FROM Events;
+SELECT * FROM Gallery;
+SELECT * FROM ContactMessages;
